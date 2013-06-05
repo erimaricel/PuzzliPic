@@ -30,20 +30,16 @@ ev.preventDefault();
  function checkwin()
   {
      var z=1;
-     var win = true;
+     var win = 0;
       $('.place').each(function(i, obj) 
           {
                     if(this.querySelector("#img"+z))
                       {
-                        win = true;
-                      }
-                    else
-                      {
-                        win = false;
+                        win++;
                       }
                     z++;
           });
-      if(win==true)
+      if(win==16)
       {
         alert("NAKADAOG KAG WANMELYON PESOS!");
       }

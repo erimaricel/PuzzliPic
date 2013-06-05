@@ -1,102 +1,78 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
-<head>
-<script type="text/javascript" src="js/jquery-1.9.1.js"></script>  
-<script type="text/javascript" src="js/jquery-ui.js"></script> 
-<script>
-function allowDrop(ev)
-{
-ev.preventDefault();
-}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-1.9.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <title>Hello World</title>
+        <style type="text/css">
+            #draggable5 { width: 75px; height: 80px; padding: 0.5em; float: left; margin: 5px; }
+            #snaptarget { height: 130px; }
+        </style>
+        <script type="text/javascript">
+            $(function() {
+                $("#draggable5").draggable({ snap: '.ui-widget-header', snapMode: 'inner', snapTolerance: 85 });
+            });
+        </script>
+    </head>
+   
+        <!--<div class="app">-->
+            <!--<h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+>            
+        </div>-->
+   <body >
+        <div class="demo">
+    
+            <div id="snaptarget" class="ui-widget-header">
+                <p>I'm a snap target</p>
+            </div>
 
-function drag(ev)
-{
-ev.dataTransfer.setData("Text",ev.target.id);
-}
+            <br clear="both" />
 
-function drop(ev, id)
-{
-ev.preventDefault();
-  if(document.getElementById(id).innerHTML < 10)
-  {
-  var data=ev.dataTransfer.getData("Text");
-  ev.target.appendChild(document.getElementById(data));
-  }
-
-  checkwin();
-
- }
-
- function checkwin()
-  {
-     var z=1;
-     var win = 0;
-      $('.place').each(function(i, obj) 
-          {
-                    if(this.querySelector("#img"+z))
-                      {
-                        win++;
-                      }
-                    z++;
-          });
-      if(win==16)
-      {
-        alert("NAKADAOG KAG WANMELYON PESOS!");
-      }
-  }
-
-</script>
-<style>
-  .puzz
-  {
-    height:50px;
-    width:50px;
-  }
-</style>
-</head>
-<body>
+            <div id="draggable5" class="ui-widget-content">
+                <p>Snap Testing</p>
+            </div>
 
 
+            </div><!-- End demo -->
 
+            <div class="demo-description">
 
-<div id='container' style='height: 200px; width: 200px'>
-</div>
+            <p>
+            <!-- Add description here -->
+            </p>
 
+        </div><!-- End demo-description -->
 
-<div id='container2' style='height: 210px; width: 210px; position:fixed; left: 200px; top: 200px;'>
-</div>
-
-
-<script>
-  var i = 1;
-  var z = 1
-  var x = 0;
-  var y = 0;
-
-  var mintop = 500;
-
-    for(z=1;z<=16;z++)
-    {
-      $("#container").append("<div id='puzz"+z+"' class='puzz' style='overflow:hidden;' draggable='true' ondragstart='drag(event)'></div>");
-      $("#puzz"+z).append("<img class='img' id='img"+z+"' draggable='false' style='overflow: hidden;' src='img/dart.jpg' alt='Clipped image'/>");
-    }
-
-    for(z=1;z<=16;z++)
-    {
-      $("#container2").append("<div id='place"+z+"' class='place' style='overflow:hidden; float:left; border: 1px solid black; height:50px; width: 50px;' ondrop='drop(event, this.id)' ondragover='allowDrop(event)'></div>");
-      
-    }
-
-
-    for(y=1; y<=4; y++)
-      {
-       for(x=1; x<=4; x++)
-          {     
-                document.getElementById('img'+i).style.marginLeft = -(x-1)*50+"px"; 
-                document.getElementById('img'+i).style.marginTop = -(y-1)*50+"px"; 
-                i++;
-          }
-      }
-
-
-</script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

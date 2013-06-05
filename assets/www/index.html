@@ -28,14 +28,28 @@
         <script src="js/jquery-ui.js"></script>
         <title>Hello World</title>
         <style type="text/css">
-            #draggable5 { width: 75px; height: 80px; padding: 0.5em; float: left; margin: 5px; }
-            #snaptarget { height: 130px; }
+            #div1, #div2
+            {float:left; width:200px; height:100px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
         </style>
-        <script type="text/javascript">
-            $(function() {
-                $("#draggable5").draggable({ snap: '.ui-widget-header', snapMode: 'inner', snapTolerance: 85 });
-            });
+        <script>
+            function allowDrop(ev)
+            {
+            ev.preventDefault();
+            }
+
+            function drag(ev)
+            {
+            ev.dataTransfer.setData("Text",ev.target.id);
+            }
+
+            function drop(ev)
+            {
+            ev.preventDefault();
+            var data=ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+            }
         </script>
+        
     </head>
    
         <!--<div class="app">-->
@@ -46,30 +60,12 @@
             </div>
 >            
         </div>-->
-   <body >
-        <div class="demo">
+   <body>
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <img src="img/brave.jpg" draggable="true" ondragstart="drag(event)" id="drag1" width="200" height="100"></div>
+        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     
-            <div id="snaptarget" class="ui-widget-header">
-                <p>I'm a snap target</p>
-            </div>
-
-            <br clear="both" />
-
-            <div id="draggable5" class="ui-widget-content">
-                <p>Snap Testing</p>
-            </div>
-
-
-            </div><!-- End demo -->
-
-            <div class="demo-description">
-
-            <p>
-            <!-- Add description here -->
-            </p>
-
-        </div><!-- End demo-description -->
-
+      
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

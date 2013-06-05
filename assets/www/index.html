@@ -28,27 +28,26 @@
         <script src="js/jquery-ui.js"></script>
         <title>Hello World</title>
         <style type="text/css">
-            #div1, #div2
-            {float:left; width:200px; height:100px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+            #div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
         </style>
         <script>
             function allowDrop(ev)
             {
-            ev.preventDefault();
+                ev.preventDefault();
             }
 
             function drag(ev)
             {
-            ev.dataTransfer.setData("Text",ev.target.id);
+                ev.dataTransfer.setData("Text",ev.target.id);
             }
 
             function drop(ev)
             {
-            ev.preventDefault();
-            var data=ev.dataTransfer.getData("Text");
-            ev.target.appendChild(document.getElementById(data));
+                ev.preventDefault();
+                var data=ev.dataTransfer.getData("Text");
+                ev.target.appendChild(document.getElementById(data));
             }
-        </script>
+</script>
         
     </head>
    
@@ -61,9 +60,11 @@
 >            
         </div>-->
    <body>
-        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <img src="img/brave.jpg" draggable="true" ondragstart="drag(event)" id="drag1" width="200" height="100"></div>
-        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="div1" ondrop="drop(event)"
+            ondragover="allowDrop(event)"></div>
+
+        <img id="drag1" src="img/brave.jpg" draggable="true"
+            ondragstart="drag(event)" width="336" height="69">
     
       
         <script type="text/javascript" src="js/index.js"></script>

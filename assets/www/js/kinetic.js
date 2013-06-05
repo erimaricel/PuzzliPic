@@ -11578,3 +11578,4 @@ var Kinetic = {};
 	//threshold The RGB euclidian distance threshold (default : 10) 
 
 })();
+

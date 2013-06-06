@@ -6,33 +6,34 @@
 <script>
 
 function init() {
-          document.addEventListener("touchstart", touchHandler, true);
-          document.addEventListener("touchmove", touchHandler, true);
-          document.addEventListener("touchend", touchHandler, true);
-          document.addEventListener("touchcancel", touchHandler, true);   
-          }
-          function touchHandler(event)
-          {
-          var touches = event.changedTouches,
-          first = touches[0],
-          type = "";
-          switch(event.type)
-          {
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);   
+}
+
+function touchHandler(event)
+{
+    var touches = event.changedTouches,
+        first = touches[0],
+        type = "";
+        switch(event.type)
+        {
           case "touchstart": type = "mousedown"; break;
           case "touchmove":  type="mousemove"; break;        
           case "touchend":   type="mouseup"; break;
           default: return;
-          }
-          var simulatedEvent = document.createEvent("MouseEvent");
+        }
+        var simulatedEvent = document.createEvent("MouseEvent");
            simulatedEvent.initMouseEvent(type, true, true, window, 1,
                               first.screenX, first.screenY,
                               first.clientX, first.clientY, false,
                               false, false, false, 0/*left*/, null);
-          first.target.dispatchEvent(simulatedEvent); 
-          event.preventDefault();
-           }
+        first.target.dispatchEvent(simulatedEvent); 
+        event.preventDefault();
+}
            
-function allowDrop(ev)
+/*function allowDrop(ev)
 {
 ev.preventDefault();
 }
@@ -53,7 +54,7 @@ ev.preventDefault();
 
   checkwin();
 
- }
+ }*/
 
  function checkwin()
   {
@@ -72,6 +73,22 @@ ev.preventDefault();
         alert("NAKADAOG KAG WANMELYON PESOS!");
       }
   }
+
+   $(function() {
+        var z =0;
+            for(z=0; z<16; z++){
+                $( "#puzz"+z ).draggable(//{ 
+                );
+
+                 $( "#place"+z ).droppable(//{ 
+                   
+                );
+             }
+             
+               
+              });
+
+  
 
 </script>
 <style>
@@ -105,13 +122,16 @@ ev.preventDefault();
 
     for(z=1;z<=16;z++)
     {
-      $("#container").append("<div id='puzz"+z+"' class='puzz' style='overflow:hidden;' draggable='true' ondragstart='drag(event)'></div>");
-      $("#puzz"+z).append("<img class='img' id='img"+z+"' draggable='false' style='overflow: hidden;' src='img/dart.jpg' alt='Clipped image'/>");
+      //$("#container").append("<div id='puzz"+z+"' class='puzz' style='overflow:hidden;' draggable='true' ondragstart='drag(event)'></div>");
+      $("#container").append("<div id='puzz"+z+"' class='puzz' style='overflow:hidden;'></div>");
+      //$("#puzz"+z).append("<img class='img' id='img"+z+"' draggable='false' style='overflow: hidden;' src='img/dart.jpg' alt='Clipped image'/>");
+      $("#puzz"+z).append("<img class='img' id='img"+z+"' draggable='false' src='img/dart.jpg' alt='Clipped image'/>");
     }
 
     for(z=1;z<=16;z++)
     {
-      $("#container2").append("<div id='place"+z+"' class='place' style='overflow:hidden; float:left; border: 1px solid black; height:50px; width: 50px;' ondrop='drop(event, this.id)' ondragover='allowDrop(event)'></div>");
+    //  $("#container2").append("<div id='place"+z+"' class='place' style='overflow:hidden; float:left; border: 1px solid black; height:50px; width: 50px;' ondrop='drop(event, this.id)' ondragover='allowDrop(event)'></div>");
+       $("#container2").append("<div id='place"+z+"' class='place' style='overflow:hidden; float:left; border: 1px solid black; height:50px; width: 50px;'></div>");
       
     }
 
@@ -132,3 +152,4 @@ ev.preventDefault();
         <script type="text/javascript">
             app.initialize();
         </script>
+</body>

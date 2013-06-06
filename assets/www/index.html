@@ -28,26 +28,14 @@
         <script src="js/jquery-ui.js"></script>
         <title>Hello World</title>
         <style type="text/css">
-            #myCanvas {width:200px;height:100px;padding:10px;border:1px solid #aaaaaa;}
-            .newbox{background:#98bf21;height:100px;width:100px;position:relative;}
+            #draggable5 { width: 75px; height: 80px; padding: 0.5em; float: left; margin: 5px; }
+            #snaptarget { height: 130px; }
         </style>
-        <script>
-            $(document).ready(function(){
-              $("#div1").click(function(){
-                $("#div1").animate( {top:'500px', opacity: 'toggle'},1000, function() {
-                    /*$(this).after('<div>Animation complete.</div>');*/
-                    //$("<div class='newbox'>I'm new box by appendTo</div>").appendTo('#box');
-                    $(this).after(function(){
-                        $("<div class='newbox'>I'm new box by appendTo</div>").appendTo('#box');
-                    });
-                 });
-                  /*$("<div class='newbox'>I'm new box by appendTo</div>").appendTo('.box');*/
-
-              });
+        <script type="text/javascript">
+            $(function() {
+                $("#draggable5").draggable({ snap: '.ui-widget-header', snapMode: 'inner', snapTolerance: 85 });
             });
-            
-</script>
-        
+        </script>
     </head>
    
         <!--<div class="app">-->
@@ -58,11 +46,30 @@
             </div>
 >            
         </div>-->
-   <body>
-        
-        <div id="div1" class='newbox'></div>
-        <!--<div style="background:#98bfff;height:100px;width:100px;position:absolute;" class="box"></div>-->
-        <div id="box"></div>
+   <body >
+        <div class="demo">
+    
+            <div id="snaptarget" class="ui-widget-header">
+                <p>I'm a snap target</p>
+            </div>
+
+            <br clear="both" />
+
+            <div id="draggable5" class="ui-widget-content">
+                <p>Snap Testing</p>
+            </div>
+
+
+            </div><!-- End demo -->
+
+            <div class="demo-description">
+
+            <p>
+            <!-- Add description here -->
+            </p>
+
+        </div><!-- End demo-description -->
+
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

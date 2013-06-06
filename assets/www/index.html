@@ -28,25 +28,14 @@
         <script src="js/jquery-ui.js"></script>
         <title>Hello World</title>
         <style type="text/css">
-            #div1 {width:200px;height:100px;padding:10px;border:1px solid #aaaaaa;}
+            #myCanvas {width:200px;height:100px;padding:10px;border:1px solid #aaaaaa;}
         </style>
         <script>
-            function allowDrop(ev)
-            {
-                ev.preventDefault();
-            }
-
-            function drag(ev)
-            {
-                ev.dataTransfer.setData("Text",ev.target.id);
-            }
-
-            function drop(ev)
-            {
-                ev.preventDefault();
-                var data=ev.dataTransfer.getData("Text");
-                ev.target.appendChild(document.getElementById(data));
-            }
+            $(document).ready(function(){
+              $("button").click(function(){
+                $("div").animate({top:'100px'});
+              });
+            });
 </script>
         
     </head>
@@ -60,11 +49,8 @@
 >            
         </div>-->
    <body>
-        <div id="div1" ondrop="drop(event)"
-            ondragover="allowDrop(event)"></div>
-
-        <img id="drag1" src="img/brave.jpg" draggable="true"
-            ondragstart="drag(event)" width="200" height="100">
+        <button>Start Animation</button>
+        <div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
     
       
         <script type="text/javascript" src="js/index.js"></script>

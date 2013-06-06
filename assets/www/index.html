@@ -29,13 +29,23 @@
         <title>Hello World</title>
         <style type="text/css">
             #myCanvas {width:200px;height:100px;padding:10px;border:1px solid #aaaaaa;}
+            .newbox{background:#98bf21;height:100px;width:100px;position:relative;}
         </style>
         <script>
             $(document).ready(function(){
-              $("button").click(function(){
-                $("div").animate({top:'100px'});
+              $("#div1").click(function(){
+                $("#div1").animate( {top:'500px', opacity: 'toggle'},1000, function() {
+                    /*$(this).after('<div>Animation complete.</div>');*/
+                    //$("<div class='newbox'>I'm new box by appendTo</div>").appendTo('#box');
+                    $(this).after(function(){
+                        $("<div class='newbox'>I'm new box by appendTo</div>").appendTo('#box');
+                    });
+                 });
+                  /*$("<div class='newbox'>I'm new box by appendTo</div>").appendTo('.box');*/
+
               });
             });
+            
 </script>
         
     </head>
@@ -49,10 +59,10 @@
 >            
         </div>-->
    <body>
-        <button>Start Animation</button>
-        <div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
-    
-      
+        
+        <div id="div1" class='newbox'></div>
+        <!--<div style="background:#98bfff;height:100px;width:100px;position:absolute;" class="box"></div>-->
+        <div id="box"></div>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

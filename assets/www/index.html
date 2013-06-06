@@ -1,121 +1,71 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
-<head>
-<script type="text/javascript" src="js/jquery-1.9.1.js"></script>  
-<script type="text/javascript" src="js/jquery-ui.js"></script> 
-<script>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-1.9.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <title>Hello World</title>
+        <style type="text/css">
+            #myCanvas {width:200px;height:100px;padding:10px;border:1px solid #aaaaaa;}
+            .newbox{background:#98bf21;height:100px;width:100px;position:relative;}
+        </style>
+        <script>
+            $(document).ready(function(){
+              $("#div1").click(function(){
+                $("#div1").animate( {top:'500px', opacity: 'toggle'},1000, function() {
+                    /*$(this).after('<div>Animation complete.</div>');*/
+                    //$("<div class='newbox'>I'm new box by appendTo</div>").appendTo('#box');
+                    $(this).after(function(){
+                        $("<div class='newbox'>I'm new box by appendTo</div>").appendTo('#box');
+                    });
+                 });
+                  /*$("<div class='newbox'>I'm new box by appendTo</div>").appendTo('.box');*/
 
- $( init );
-
- function init() {
-  document.addEventListener("touchstart", touchHandler, true);
-  document.addEventListener("touchmove", touchHandler, true);
-  document.addEventListener("touchend", touchHandler, true);
-  document.addEventListener("touchcancel", touchHandler, true);   
-  }
-  function touchHandler(event)
-  {
-  var touches = event.changedTouches,
-  first = touches[0],
-  type = "";
-  switch(event.type)
-  {
-  case "touchstart": type = "mousedown"; break;
-  case "touchmove":  type="mousemove"; break;        
-  case "touchend":   type="mouseup"; break;
-  default: return;
-  }
-  var simulatedEvent = document.createEvent("MouseEvent");
-   simulatedEvent.initMouseEvent(type, true, true, window, 1,
-                      first.screenX, first.screenY,
-                      first.clientX, first.clientY, false,
-                      false, false, false, 0/*left*/, null);
-  first.target.dispatchEvent(simulatedEvent); 
-  event.preventDefault();
-   }
-
- function checkwin()
-  {
-     var z=1;
-     var win = 0;
-      $('.place').each(function(i, obj) 
-          {
-                    if(this.querySelector("#img"+z))
-                      {
-                        win++;
-                      }
-                    z++;
-          });
-      if(win==16)
-      {
-        alert("NAKADAOG KAG WANMELYON PESOS!");
-      }
-  }
-
+              });
+            });
+            
 </script>
-<style>
-  .puzz
-  {
-    height:50px;
-    width:50px;
-  }
-</style>
-</head>
-<body>
-
-
-
-
-<div id='container' style='height: 200px; width: 200px'>
-</div>
-
-
-<div id='container2' style='height: 210px; width: 210px; position:fixed; left: 200px; top: 200px;'>
-</div>
-
-
-<script>
-  var i = 1;
-  var z = 1
-  var x = 0;
-  var y = 0;
-
-  var mintop = 500;
-
-    for(z=1;z<=16;z++)
-    {
-      $("body").append("<div id='puzz"+z+"' class='puzz' style='overflow:hidden;'></div>");
-      $("#puzz"+z).append("<img class='img' id='img"+z+"' draggable='false'  style='overflow: hidden;' src='img/dart.jpg' alt='Clipped image'/>");
-    }
-
-    for(z=1;z<=16;z++)
-    {
-      $("#container2").append("<div id='place"+z+"' class='place' style='display: block; text-align: left; float:left; border: 1px solid black; height:52px; width: 52px;'></div>");
-      
-    }
-
-    $('.puzz').draggable();
-
-    var stockArea = $('.place').droppable({
-        drop: function (event, ui) {
-            var target = $('.place');
-            $(ui.draggable).appendTo(this);
-        }
-    });
- 
-    // $(".puzz").draggable({ appendTo: ".place" });
-     // $( ".place").droppable({accept: ".puzz"});
-
-
-    for(y=1; y<=4; y++)
-      {
-       for(x=1; x<=4; x++)
-          {     
-                document.getElementById('img'+i).style.marginLeft = -(x-1)*50+"px"; 
-                document.getElementById('img'+i).style.marginTop = -(y-1)*50+"px"; 
-                i++;
-          }
-      }
-
-
-</script>
+        
+    </head>
+   
+        <!--<div class="app">-->
+            <!--<h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+>            
+        </div>-->
+   <body>
+        
+        <div id="div1" class='newbox'></div>
+        <!--<div style="background:#98bfff;height:100px;width:100px;position:absolute;" class="box"></div>-->
+        <div id="box"></div>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

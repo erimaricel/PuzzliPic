@@ -305,11 +305,11 @@ var uploadScoreURL = "http://puzzlepic.cso.ph/rest/apis/pzlpc-apis/uploadScore";
 		dataType: 'json',
 		data: 'userName='+username+'&gameScore='+finalScore,
 		success: function (data) {
-		  moveFileHard();
+		  
 		}
 	});
   }
-    moveFileHard();
+    
  }
  
 var records = new Array();
@@ -336,29 +336,4 @@ function getHighScores(){
   });
 }
 
- function moveFileHard()
-  {
-      window.resolveLocalFileSystemURI(imageData, moveFileSuccessHard, resOnErrorHard);
-  }
-
-  function moveFileSuccessHard(entry)
-  {
-      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
-          function(fileSys)
-          {
-              fileSys.root.getDirectory("PuzzlePic", {create:true, exclusive: false},
-                    function(directory) 
-                    {
-                      entry.moveTo(directory, null, moveSuccess, resOnErrorHard);
-                    }, resOnError);
-          }, resOnErrorHard);
-  }
-
-  function moveSuccess(entry){
-      console.log("New Path: " +entry.fullPath);
-
-  }
-
-  function resOnErrorHard(error){
-    console.log("Error: " +error.code)
-  }
+ 

@@ -1,12 +1,11 @@
 
-
 function viewGallery ()
 {
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+	window.requestFileSystem(LocalFileSystem.TEMPORARY, 0,
 		function(fileSys) {
-            fileSys.root.getDirectory("PuzzlePic", {create:true, exclusive: false},
-                function(directory) {
+                    var directory = fileSys.root;
 					var directoryReader = directory.createReader();
+                    var directoryReader = directory.createReader();
 						directoryReader.readEntries(function(entries) {
 							var i;
 							for (i=0; i<entries.length; i++) {
@@ -14,15 +13,15 @@ function viewGallery ()
 							}
 
 						});
-                              
-                }, resOnError);
-       }, resOnError);
 
-	
+       }, resOnError);
 			
 }
 
-function resOnError(error) { 
+function resOnError(error)
+{
          console.log("Error:"+error.code); 
-} 
+}
+
+
 

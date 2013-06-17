@@ -6,6 +6,7 @@
     var myintNormal;
     var checkwintimerNormal;
     var imageData;
+    var destination;
     // Wait for Cordova to connect with the device
     //
 
@@ -20,29 +21,29 @@
     function initNormal(){
       document.addEventListener("deviceready",onDeviceReadyNormal,false);
     }
+
   
     // Cordova is ready to be used!
     //
     function onDeviceReadyNormal() {
-      // navigator.notification.alert("Application Started");
+        //navigator.notification.alert("Application Started");
         pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
         capturePhotoNormal();
     }
 
     function capturePhotoNormal() {
-    // Take picture using device camera and retrieve image as base64-encoded string
-            navigator.camera.getPicture(startNormal, onFail,{
-            quality : 75, 
-            destinationType : Camera.DestinationType.FILE_URI, 
-            sourceType : Camera.PictureSourceType.CAMERA, 
-            allowEdit : true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 200,
-            targetHeight: 200,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true });         
-   }
+        // Take picture using device camera and retrieve image as base64-encoded string
+        navigator.device.capture.captureImage(startNormal, onFail,{
+                                destinationType : Camera.DestinationType.FILE_URI,
+                                sourceType : Camera.PictureSourceType.CAMERA,
+                                allowEdit : false,
+                                encodingType: Camera.EncodingType.JPEG,
+                                targetWidth: 200,
+                                targetHeight: 200,
+                                popoverOptions: CameraPopoverOptions});
+       
+    }
 
 
     // A button will call this function
@@ -112,6 +113,7 @@
           clearInterval(myintNormal);
           clearInterval(checkwintimerNormal);
           touchRemove();
+          //movingFile();
           displayWinNormal();
           return true;
         }
@@ -150,7 +152,10 @@
 
 
     function startNormal(imageURI) {
-	  imageData=imageURI;
+        //alert("alert!");
+	  //imageData=imageURI[0].fullPath;
+        imageData=imageURI[0];
+       // movingFile();
       touchinit();
       resetWinNormal();
       $('#container').empty();
@@ -171,7 +176,7 @@
           var roll = array.splice(num, 1);
           m = roll;
           $("#playblock"+z).append("<div id='puzz"+z+"' class='puzz'></div>");
-          $("#puzz"+z).append("<img class='img' id='img"+m+"' draggable='false'  style='overflow: hidden;' src='"+imageData+"' width='200px' height='200px'/>");
+          $("#puzz"+z).append("<img class='img' id='img"+m+"' draggable='false'  style='overflow: hidden;' src='"+imageData.fullPath+"' width='200px' height='200px'/>");
       }
 
 
@@ -245,8 +250,8 @@
         clearInterval(checkwintimerNormal);
         alert("Game Over");
         window.location = "index.html";
-      }
-    }
+      }  
+}
 
 // Show end game score 
 //
@@ -309,11 +314,11 @@ var uploadScoreURL = "http://puzzlepic.cso.ph/rest/apis/pzlpc-apis/uploadScore";
 		dataType: 'json',
 		data: 'userName='+username+'&gameScore='+finalScore,
 		success: function (data) {
-		  moveFileNormal();
+		  //movingFile();
 		}
 	});
   }
-    moveFileNormal();
+    //movingFile();
  }
  
  
@@ -341,31 +346,69 @@ var getHighScoresURL = "http://puzzlepic.cso.ph/rest/apis/pzlpc-apis/getHighScor
 	  });
  }
 
-  function moveFileNormal()
+ /* function moveFileNormal()
   {
-  
-      window.resolveLocalFileSystemURI(imageData, moveFileSuccessNormal, resOnErrorNormal);
+      alert("inside moveFile -->"+imageData);
+     // window.resolveLocalFileSystemURI(imageData, moveFileSuccessNormal, resOnErrorNormal);
   }
 
   function moveFileSuccessNormal(entry)
   {
- 
-      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+      alert("inside moveFileSuccessNormal -->"+entry);
+      window.requestFileSystem(LocalFileSystem.TEMPORARY, 0,
           function(fileSys)
           {
-              fileSys.root.getDirectory("PuzzlePic", {create:true, exclusive: false},
+              alert("after requestFileSystem -->"+fileSys.fullPath);
+              fileSys.root.getDirectory("PuzzlePicTest", {create:true, exclusive: false},
                     function(directory) 
                     {
-                      entry.moveTo(directory, null, moveSuccess, resOnErrorNormal);
+                                        alert(directory.fullPath);
+                      
+                      entry.copyTo(directory, null, moveSuccess, resOnErrorNormal);
                     }, resOnError);
           }, resOnErrorNormal);
 
   }
 
   function moveSuccess(entry){
+      alert("moveSuccess");
       console.log("New Path: " +entry.fullPath);
   }
 
   function resOnErrorNormal(error){
     console.log("Error: " +error.code)
   }
+
+function movingFile ()
+{
+    window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, function(fs){
+                             fs.root.getDirectory("PuzzlePic", {create: true, exclusive: false},
+                                             function(entry){
+                                                  alert("inside getDirectory");
+                                                  alert(entry.fullPath);
+                                                  alert(imageData.name+ " imageData name");
+                                                  alert(imageData.fullPath+ " imageData fullpath");
+                                                 // destination = entry.fullPath;
+                                                  moveFile(entry);
+                                                  //imageData.copyTo(destination, null, moveSuccess, resOnErrorNormal);
+                                             
+                                             }, function(){
+                                             alert("file create error");
+                                             });
+    }, null);
+   
+    
+}
+
+function moveFile(entry){
+    alert("inside moveFile function");
+    //alert(entry.fullPath+" entry fullpath inside moveFile function");
+    //var parentName = destination.substring(destination.lastIndexOf('/')+1);
+    //var parentENtry = new DirectoryEntry(parentName, destination);
+    //var dest = entry.fullPath;
+    //alert(source.fullPath+" source fullpath");
+    //alert(dest+" dest");
+    var parentEntry = new DirectoryEntry({fullPath: entry});
+    imageData.copyTo(parentENtry, "TEST.jpg", moveSuccess, resOnErrorNormal);
+    
+}*/
